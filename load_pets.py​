@@ -1,3 +1,51 @@
+python
+import sqlite3
+
+# Data to be inserted into the database
+data = [
+    (1, 'James', 'Smith', 41),
+    (2, 'Diana', 'Greene', 23),
+    (3, 'Sara', 'White', 27),
+    (4, 'William', 'Gibson', 23),
+    (1, 'Rusty', 'Dalmatian', 4, 1),
+    (2, 'Bella', 'Alaskan Malamute', 3, 0),
+    (3, 'Max', 'Cocker Spaniel', 1, 0),
+    (4, 'Rocky', 'Beagle', 7, 0),
+    (5, 'Rufus', 'Cocker Spaniel', 1, 0),
+    (6, 'Spot', 'Bloodhound', 2, 1)
+]
+
+# Create connection and cursor
+conn = sqlite3.connect('pets.db')
+cursor = conn.cursor()
+
+# Insert data into person table
+for person_data in data[:4]:
+    cursor.execute("INSERT INTO person VALUES (?, ?, ?, ?)", person_data)
+
+
+# Insert data into pet table
+for pet_data in data[4:]:
+    cursor.execute("INSERT INTO pet VALUES (?, ?, ?, ?, ?)", pet_data)
+
+# Insert data into person_pet table
+person_pet_data = [
+    (1, 1),
+    (1, 2),
+    (2, 3),
+    (2, 4),
+    (3, 5),
+    (4, 6)
+]
+
+for person_pet in person_pet_data:
+    cursor.execute("INSERT INTO person_pet VALUES (?, ?)", person_pet)
+
+# Commit changes and close connection
+conn.commit()
+conn.close()
+
+print("Data successfully loaded into the database.")
 
 if __name__ == "__main__":
     pass
