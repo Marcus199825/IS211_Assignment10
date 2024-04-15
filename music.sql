@@ -1,22 +1,23 @@
-sql
 -- Create table for artists
-CREATE TABLE Artist (
+CREATE TABLE artist (
     artist_id INTEGER PRIMARY KEY,
-    name TEXT
+    name TEXT NOT NULL
 );
 
 -- Create table for albums
-CREATE TABLE Album (
+CREATE TABLE album (
     album_id INTEGER PRIMARY KEY,
-    name TEXT,
+    name TEXT NOT NULL,
     artist_id INTEGER,
-    FOREIGN KEY (artist_id) REFERENCES Artist(artist_id)
+    FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
 );
 
 -- Create table for songs
-CREATE TABLE Song (
+CREATE TABLE song (
     song_id INTEGER PRIMARY KEY,
-    name TEXT,
+    name TEXT NOT NULL,
     album_id INTEGER,
     track_number INTEGER,
-
+    duration_seconds INTEGER,
+    FOREIGN KEY (album_id) REFERENCES album(album_id)
+);
